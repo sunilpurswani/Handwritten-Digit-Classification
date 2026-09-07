@@ -1,12 +1,12 @@
 # Handwritten Digit Classification
 
-I built this project to compare a traditional machine-learning model with a neural network for handwritten digit classification. The analysis uses 42,000 handwriting samples and evaluates how well each model recognizes digits from pixel-level features.
+This project compares a traditional machine-learning approach with a neural network for handwritten digit classification using 42,000 handwriting samples and pixel-level features.
 
 ## Objective
 
-The project explores whether handwriting classification can support early identification of students who may need additional fine-motor-skill development support.
+The goal is to evaluate how effectively different supervised-learning methods can classify handwritten digits and to compare their performance across standard classification metrics.
 
-I compared:
+The two models used are:
 
 - K-Nearest Neighbors (KNN)
 - Feed-forward Neural Network
@@ -19,11 +19,9 @@ The dataset contains:
 - 10 digit classes (0-9)
 - 45 pixel-intensity features
 - No missing values
-- A reasonably balanced class distribution
+- A balanced distribution across digit classes
 
-The dataset file is not included in the repository. To run the notebook, place `letters.csv` inside the `data/` folder.
-
-![Class distribution](assets/class_distribution.png)
+The dataset is included in the repository at [`data/letters.csv`](./data/letters.csv).
 
 ## Approach
 
@@ -31,11 +29,11 @@ The dataset file is not included in the repository. To run the notebook, place `
 
 - Used an 80/20 stratified train-test split
 - Applied MinMax scaling to pixel features
-- Preserved class distribution across training and test data
+- Preserved the class distribution across training and test data
 
 ### K-Nearest Neighbors
 
-I tuned KNN with randomized cross-validation across:
+KNN was tuned using randomized cross-validation across:
 
 - Number of neighbors
 - Uniform vs. distance weighting
@@ -45,7 +43,7 @@ The best configuration used 14 neighbors with distance weighting and Minkowski d
 
 ### Neural Network
 
-I built a feed-forward neural network with:
+The feed-forward neural network used:
 
 - Dense layers with 256, 256, and 128 neurons
 - ReLU activation
@@ -64,50 +62,23 @@ I built a feed-forward neural network with:
 | Weighted Recall | 65.86% | 70.95% |
 | Weighted F1-Score | 65.39% | 70.90% |
 
-The neural network performed better across all four evaluation metrics.
+The neural network outperformed KNN across all four evaluation metrics. It improved weighted F1-score from **65.39% to 70.90%** and showed stronger overall class separation.
 
-### KNN Confusion Matrix
-
-![KNN confusion matrix](assets/knn_confusion_matrix.png)
-
-KNN performed well on clearer digits such as 0, 1, and 6, but had more difficulty separating visually similar digits such as 3, 8, and 9.
-
-### Neural Network Confusion Matrix
-
-![Neural network confusion matrix](assets/nn_confusion_matrix.png)
-
-The neural network produced stronger class separation and more consistent performance across the digit classes.
-
-## Training Behavior
-
-![Neural network accuracy](assets/nn_accuracy_curve.png)
-
-![Neural network loss](assets/nn_loss_curve.png)
-
-Training and validation performance stabilized without a large gap, indicating that the regularization strategy helped control overfitting.
+KNN performed better on clearer digits such as 0, 1, and 6, while visually similar digits such as 3, 8, and 9 were more difficult to distinguish. The neural network handled these nonlinear pixel relationships more effectively.
 
 ## Conclusion
 
-The neural network was the stronger model for this dataset, improving weighted F1-score from 65.39% to 70.90%. Its ability to learn non-linear relationships between pixel features gave it an advantage over the distance-based KNN model.
+The neural network was the stronger model for this dataset because it was better able to learn complex relationships between pixel features. KNN provided a useful baseline, but its distance-based approach was less effective for visually similar handwritten digits.
 
-For future work, I would test convolutional neural networks if the available pixel features can be reconstructed into meaningful two-dimensional image representations.
+A possible next step would be to test a convolutional neural network if the pixel features can be reconstructed into meaningful two-dimensional image representations.
 
-## Repository Structure
+## Project Files
 
 ```text
 Handwritten-Digit-Classification/
-├── assets/
-│   ├── class_distribution.png
-│   ├── knn_confusion_matrix.png
-│   ├── nn_accuracy_curve.png
-│   ├── nn_confusion_matrix.png
-│   └── nn_loss_curve.png
+├── Handwritten_Text_Classification.ipynb
 ├── data/
-│   └── README.md
-├── notebooks/
-│   └── handwritten_digit_classification.ipynb
-├── report/
-│   └── Handwritten_Text_Classification.pdf
+│   └── letters.csv
 ├── .gitignore
 ├── README.md
 └── requirements.txt
@@ -120,18 +91,19 @@ Python, pandas, NumPy, scikit-learn, TensorFlow/Keras, Matplotlib, Jupyter Noteb
 ## Run the Project
 
 1. Clone the repository.
-2. Place `letters.csv` in the `data/` folder.
-3. Install dependencies:
+2. Install the required packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Open the notebook:
+3. Open the notebook:
 
 ```bash
-jupyter notebook notebooks/handwritten_digit_classification.ipynb
+jupyter notebook Handwritten_Text_Classification.ipynb
 ```
+
+The full analysis and model code are available in [`Handwritten_Text_Classification.ipynb`](./Handwritten_Text_Classification.ipynb).
 
 ## Author
 
