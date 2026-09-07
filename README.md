@@ -135,5 +135,4 @@ jupyter notebook notebooks/handwritten_digit_classification.ipynb
 
 ## Author
 
-Sunil Purswani  
-MS Analytics, Northeastern University
+Author: Sunil Purswani
